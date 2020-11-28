@@ -1,15 +1,15 @@
 from mininet.topo import Topo
 
 class MyTopo( Topo ):
-    "Simple topology example created by me."
+    "我创建的简单拓扑示例"
 
     def __init__( self ):
-        "Create custom topo."
+        "创建用户定义拓扑"
 
-        # Initialize topology
+        # 初始化拓扑
         Topo.__init__( self )
 
-        # Add hosts and switches
+        # 加入主机和交换机
         FirstHost = self.addHost( 'h1' )
         SecondHost = self.addHost( 'h2' )
         ThirdHost = self.addHost( 'h3' )
@@ -23,7 +23,7 @@ class MyTopo( Topo ):
         fifthSwitch = self.addSwitch( 's5' )
         sixthSwitch = self.addSwitch( 's6' )
 
-        # Add links
+        # 添加连接
         self.addLink( firstSwitch, FirstHost )
         self.addLink( secondSwitch, SecondHost )
         self.addLink( thirdSwitch, ThirdHost )

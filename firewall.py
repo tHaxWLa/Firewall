@@ -16,7 +16,7 @@ class Firewall (EventMixin):
     def __init__ (self):
         self.listenTo(core.openflow)
         log.info("Enabling Firewall Module")
-        # Our firewall table
+        # 我们的防火墙表
         self.firewall = {}
 
     def sendRule (self, src, dst, duration = 0):
@@ -37,7 +37,7 @@ class Firewall (EventMixin):
         msg.priority = 10
         self.connection.send(msg)
 
-    # function that allows adding firewall rules into the firewall table
+    # 允许向防火墙表中添加防火墙规则的函数
     def AddRule (self, src=0, dst=0, value=True):
         if (src, dst) in self.firewall:
             log.info("Rule already present drop: src %s - dst %s", src, dst)
@@ -46,7 +46,7 @@ class Firewall (EventMixin):
             self.firewall[(src, dst)]=value
             self.sendRule(src, dst, 10000)
 
-    # function that allows deleting firewall rules from the firewall table
+    # 允许从防火墙表中删除防火墙规则的函数
     def DeleteRule (self, src=0, dst=0):
         try:
             del self.firewall[(src, dst)]
@@ -63,7 +63,7 @@ class Firewall (EventMixin):
         reader = csv.reader(ifile)
         rownum = 0
         for row in reader:
-            # Save header row.
+            # 保存标题行
             if rownum == 0:
                 header = row
             else:
