@@ -1,3 +1,5 @@
+# -*- coding: utf-8
+
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
 from pox.lib.revent import *
@@ -15,14 +17,14 @@ class Firewall (EventMixin):
 
     def __init__ (self):
         self.listenTo(core.openflow)
-        log.info("Enabling Firewall Module")
-        # 我们的防火墙表
+        log.info("启动防火墙模块")
+        # 防火墙规则表
         self.firewall = {}
 
     def sendRule (self, src, dst, duration = 0):
         """
-        Drops this packet and optionally installs a flow to continue
-        dropping similar ones for a while
+        删除此数据包,并选择性安装一个流
+	在一段时间内继续丢弃类似的数据包
         """
         if not isinstance(duration, tuple):
             duration = (duration,duration)
@@ -37,33 +39,33 @@ class Firewall (EventMixin):
         msg.priority = 10
         self.connection.send(msg)
 
-    # 允许向防火墙表中添加防火墙规则的函数
+    # 向防火墙规则表中添加规则
     def AddRule (self, src=0, dst=0, value=True):
         if (src, dst) in self.firewall:
-            log.info("Rule already present drop: src %s - dst %s", src, dst)
+            log.info("规则已存在 drop: src %s - dst %s", src, dst)
         else:
-            log.info("Adding firewall rule drop: src %s - dst %s", src, dst)
+            log.info("添加规则 drop: src %s - dst %s", src, dst)
             self.firewall[(src, dst)]=value
             self.sendRule(src, dst, 10000)
 
-    # 允许从防火墙表中删除防火墙规则的函数
+    # 从防火墙规则表中删除规则
     def DeleteRule (self, src=0, dst=0):
         try:
             del self.firewall[(src, dst)]
             sendRule(src, dst, 0)
-            log.info("Deleting firewall rule drop: src %s - dst %s", src, dst)
+            log.info("删除规则 drop: src %s - dst %s", src, dst)
         except KeyError:
-            log.error("Cannot find in rule drop src %s - dst %s", src, dst)
+            log.error("无此规则 drop src %s - dst %s", src, dst)
 
     def _handle_ConnectionUp (self, event):
-        ''' Add your logic here ... '''
+        ''' 在此处添加逻辑 '''
         self.connection = event.connection
 
         ifile  = open(policyFile, "rb")
         reader = csv.reader(ifile)
         rownum = 0
         for row in reader:
-            # 保存标题行
+            # 保存规则
             if rownum == 0:
                 header = row
             else:
@@ -75,10 +77,10 @@ class Firewall (EventMixin):
             rownum += 1
         ifile.close()
 
-        log.info("Firewall rules installed on %s", dpidToStr(event.dpid))
+        log.info("防火墙规则安装在 %s", dpidToStr(event.dpid))
 
 def launch ():
     '''
-    Starting the Firewall module
+    启动防火墙模块
     '''
     core.registerNew(Firewall)
