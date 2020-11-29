@@ -1,4 +1,5 @@
 # SDN-firewall
+[使用到的指令介绍](https://www.cnblogs.com/xie37/p/14056239.html)
 将 firewall.py 和 firewallpolicies.csv 放入 ~/P4/pox/pox/misc/ 目录下
 修改 firewall.py 的 第12行为 firewallpolicies.csv 的路径
 我这里是 policyFile = "/home/myp4/P4/pox/pox/misc/firewallpolicies.csv"
