@@ -16,3 +16,5 @@ sudo mn --custom topology.py --topo mytopo --mac --controller=remote,ip=127.0.0.
 ```
 待第一个终端将防火墙规则加载完成后,即可 pingall 检验结果
 ip_0 与 ip_1 的主机将无法相互到达
+
+[详细信息](https://www.cnblogs.com/xie37/p/14056239.html)
