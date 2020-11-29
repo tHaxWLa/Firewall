@@ -18,3 +18,4 @@ sudo mn --custom topology.py --topo mytopo --mac --controller=remote,ip=127.0.0.
 ip_0 与 ip_1 的主机将无法相互到达
 
 [详细信息](https://www.cnblogs.com/xie37/p/14056239.html)
+[演示视频](https://www.weiyun.com/video_preview?videoID=1bf9a2f4-d66f-477c-8c07-6be0f74bbd22&dirKey=b2123610f0a739ae12b58dcd423dce4a&pdirKey=b2123610f338fdcb41c5dfa52b9ed888)
