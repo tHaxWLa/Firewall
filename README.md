@@ -19,4 +19,4 @@ ip_0 与 ip_1 的主机将无法相互到达
 
 [详细信息](https://www.cnblogs.com/xie37/p/14056239.html)
 
-[演示视频](https://www.weiyun.com/video_preview?videoID=1bf9a2f4-d66f-477c-8c07-6be0f74bbd22&dirKey=b2123610f0a739ae12b58dcd423dce4a&pdirKey=b2123610f338fdcb41c5dfa52b9ed888)
+[演示视频](https://www.weiyun.com/video_preview?videoID=8b26338a-48cc-4b5b-9721-1127c7d2cc47&dirKey=b2123610f0a739ae12b58dcd423dce4a&pdirKey=b2123610f338fdcb41c5dfa52b9ed888)
