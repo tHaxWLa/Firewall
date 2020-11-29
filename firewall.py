@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*- 
 
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
@@ -24,7 +24,7 @@ class Firewall (EventMixin):
     def sendRule (self, src, dst, duration = 0):
         """
         删除此数据包,并选择性安装一个流
-	在一段时间内继续丢弃类似的数据包
+        在一段时间内继续丢弃类似的数据包
         """
         if not isinstance(duration, tuple):
             duration = (duration,duration)
@@ -39,16 +39,16 @@ class Firewall (EventMixin):
         msg.priority = 10
         self.connection.send(msg)
 
-    # 向防火墙规则表中添加规则
+    # 在防火墙表中添加规则
     def AddRule (self, src=0, dst=0, value=True):
         if (src, dst) in self.firewall:
             log.info("规则已存在 drop: src %s - dst %s", src, dst)
         else:
-            log.info("添加规则 drop: src %s - dst %s", src, dst)
+            log.info("添加规则 rule drop: src %s - dst %s", src, dst)
             self.firewall[(src, dst)]=value
             self.sendRule(src, dst, 10000)
 
-    # 从防火墙规则表中删除规则
+    # 从防火墙表中删除规则
     def DeleteRule (self, src=0, dst=0):
         try:
             del self.firewall[(src, dst)]
@@ -58,14 +58,14 @@ class Firewall (EventMixin):
             log.error("无此规则 drop src %s - dst %s", src, dst)
 
     def _handle_ConnectionUp (self, event):
-        ''' 在此处添加逻辑 '''
+        ''' 在此处添加逻辑 ... '''
         self.connection = event.connection
 
         ifile  = open(policyFile, "rb")
         reader = csv.reader(ifile)
         rownum = 0
         for row in reader:
-            # 保存规则
+            # 保存表头
             if rownum == 0:
                 header = row
             else:
@@ -77,7 +77,7 @@ class Firewall (EventMixin):
             rownum += 1
         ifile.close()
 
-        log.info("防火墙规则安装在 %s", dpidToStr(event.dpid))
+        log.info("防火墙规则安装于 %s", dpidToStr(event.dpid))
 
 def launch ():
     '''
